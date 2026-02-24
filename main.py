@@ -182,8 +182,8 @@ def authenticate_github():
 
     # 1. Try to load from Environment Variables (GitHub Actions)
     # These are stored as Secrets in your repo settings
-    creds_json_str = os.environ.get('GDRIVE_CREDENTIALS_JSON')
-    token_json_str = os.environ.get('GDRIVE_TOKEN_JSON')
+    creds_json_str = os.environ.get('CREDENTIALS_JSON')
+    token_json_str = os.environ.get('TOKEN_JSON')
 
     if creds_json_str and token_json_str:
         # Load directly from the strings
