@@ -13,7 +13,7 @@ Original file is located at
 
 !pip install google-api-python-client
 
-!pip install supabase
+# !pip install supabase
 
 from google import genai
 import numpy as np
@@ -24,7 +24,7 @@ import os.path
 import markdown
 import json
 import requests
-from supabase import create_client, Client
+# from supabase import create_client, Client
 
 import google.auth
 from googleapiclient.http import MediaInMemoryUpload
