@@ -373,7 +373,7 @@ def main():
     SUPABASE_URL = os.environ.get('SUPABASE_URL')
     # The 'service_role' key found in Project Settings > API
     SUPABASE_SERVICE_KEY = os.environ.get('SUPABASE_SERVICE_KEY')
-    bucket = os.environ.get('supabase_bucket')
+    bucket = os.environ.get('SUPABASE_BUCKET')
     upload_markdown_to_supabase(response.text, bucket, f"{title}.md", SUPABASE_URL, SUPABASE_SERVICE_KEY)
 
 if __name__ == "__main__":
