@@ -1,0 +1,8 @@
+[theme]
+primaryColor = "#463CFF"
+textColor = "#06251C"
+orangeColor = "#CEFE06"
+redColor = "#463CFF"
+
+[server]
+enableStaticServing = true
