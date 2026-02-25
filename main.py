@@ -198,10 +198,9 @@ def generate_report(chat, tender_data):
 
   # print(response.text)
 
-  for message in chat.get_history():
+  # for message in chat.get_history():
       # print(f'role - {message.role}',end=": ")
       # print(message.parts[0].text)
-
   return response
 
 """# Save to Drive"""
