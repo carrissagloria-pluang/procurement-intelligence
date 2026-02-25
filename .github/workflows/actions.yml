@@ -40,7 +40,11 @@ jobs:
           
           # Repository Variables
           SUPABASE_BUCKET: ${{ vars.SUPABASE_BUCKET }}
-        run: python main.py
+        run: |
+          echo "Currently in: $(pwd)"
+          echo "Files in root:"
+          ls -F
+          python main.py
           
       - name: commit files
         run: |
