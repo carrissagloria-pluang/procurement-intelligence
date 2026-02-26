@@ -352,7 +352,7 @@ def main():
 
   # get the list of reports to generate - from the sheets list
   SPREADSHEET_ID = os.environ.get('SPREADSHEET_ID')
-  RANGE_NAME = "Tender Date!A1:E"
+  RANGE_NAME = "Proc Pipeline 2026"
   tender_df, gen_report = process_data(creds, SPREADSHEET_ID, RANGE_NAME)
 
   # DELETE BEFORE IMPORTING TO GITH
@@ -381,7 +381,6 @@ def main():
     send_formatted_markdown_email(creds, 'carrissa.gloria@pluang.com', subject, markdown_text)
 
     # save to supabase
-    # MOVE TO SECRET ENVIRON
     SUPABASE_URL = os.environ.get('SUPABASE_URL')
     # The 'service_role' key found in Project Settings > API
     SUPABASE_SERVICE_KEY = os.environ.get('SUPABASE_SERVICE_KEY')
