@@ -114,7 +114,7 @@ def process_data(creds, SPREADSHEET_ID, RANGE_NAME):
 
   # preprocess and prepare the data
   tender_df = pd.DataFrame(tender_data)
-  del tender_df.iloc[0:3]
+  tender_df = tender_df.iloc[3:].reset_index(drop=True)
   new_header = tender_df.iloc[0]
   tender_df = tender_df[1:]
   tender_df.columns = new_header
