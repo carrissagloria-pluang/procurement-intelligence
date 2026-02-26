@@ -324,6 +324,18 @@ def upload_markdown_to_supabase(markdown_string, bucket, file_path, project_url,
 
 """# Orchestrate the Automation"""
 
+def prepare_filename(name, category):
+  name = re.sub(r'\s+', ' ', name.lower().replace('&', 'and'))
+  name = re.sub(r'\s', '-', name)
+  
+  category = re.sub(r'\s+', ' ', category.lower().replace('&', 'and'))
+  category = re.sub(r'\s', '-', category)
+
+  date = datetime.now().strftime("%Y-%m-%d")
+
+  filename = name+"-"+category+"-"+date
+  return filename
+  
 def main():
   SCOPES = [
     'https://www.googleapis.com/auth/drive.file',
@@ -360,7 +372,7 @@ def main():
     response = generate_report(chat, tender_data)
 
     # upload to google drive
-    title = tender_data['Category']+"-"+tender_data['Vendor Name']
+    title = prepare_filename(tender_data['Vendor Name'], tender_data['Category'])
     upload_markdown_as_doc(creds, title, response.text)
 
     # send the report through email
