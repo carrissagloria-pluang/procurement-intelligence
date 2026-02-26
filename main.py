@@ -114,6 +114,7 @@ def process_data(creds, SPREADSHEET_ID, RANGE_NAME):
 
   # preprocess and prepare the data
   tender_df = pd.DataFrame(tender_data)
+  del tender_df.iloc[0:3]
   new_header = tender_df.iloc[0]
   tender_df = tender_df[1:]
   tender_df.columns = new_header
@@ -135,10 +136,8 @@ def process_data(creds, SPREADSHEET_ID, RANGE_NAME):
 """# Gemini API - report generation"""
 
 def create_prompt(tender_data):
-  category = tender_data['Category']
-  vendor = tender_data['Vendor Name']
-  contract_length = tender_data['Contract Length']
-  currency = tender_data['Currency']
+  category = tender_data['Category Spend']
+  vendor = tender_data['Suppliers Name']
 
   prompt = f"""
     Role: You are an elite, senior Procurement Intelligence Analyst. Your objective is to conduct deep, exhaustive web research and synthesize a highly strategic, executive-level category intelligence report.
@@ -147,8 +146,6 @@ def create_prompt(tender_data):
 
     - Category Focus: {category}
     - Current Vendor: {vendor}
-    - Our Base Currency: {currency}
-    - Contract Timeline: {contract_length}
 
     Instructions: Scour recent financial reports, tech news, analyst insights (Gartner/Forrester), G2/Capterra reviews, pricing databases, and M&A press releases to answer the following parameters comprehensively. If exact private data (like specific B2B pricing) is unavailable, provide the most accurate market estimates, averages, or proxies. Include the sources you used to generate the procurement intelligence as a citation with the source name as the display text and an embedded link on that display text.
 
@@ -372,11 +369,11 @@ def main():
     response = generate_report(chat, tender_data)
 
     # upload to google drive
-    title = prepare_filename(tender_data['Vendor Name'], tender_data['Category'])
+    title = prepare_filename(tender_data['Suppliers Name'], tender_data['Category Spend'])
     upload_markdown_as_doc(creds, title, response.text)
 
     # send the report through email
-    subject = "Procurement Intelligence Report -" + tender_data['Category'] + "-" + tender_data['Vendor Name']
+    subject = "Procurement Intelligence Report -" + tender_data['Category Spend'] + "-" + tender_data['Suppliers Name']
     markdown_text = response.text
     send_formatted_markdown_email(creds, 'carrissa.gloria@pluang.com', subject, markdown_text)
 
