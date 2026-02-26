@@ -119,15 +119,15 @@ def process_data(creds, SPREADSHEET_ID, RANGE_NAME):
   tender_df = tender_df[1:]
   tender_df.columns = new_header
 
-  # change the 'Tender Start Date' data type
-  tender_df['Tender Start Date'] = pd.to_datetime(tender_df['Tender Start Date'], format='%d/%m/%Y')
+  # change the 'Tender Start Date ' data type
+  tender_df['Tender Start Date '] = pd.to_datetime(tender_df['Tender Start Date '], format='%d/%m/%Y')
 
   # loop through to select tender within 1 week
   gen_report = []
 
   for i in range(len(tender_df)):
     tender = tender_df.iloc[i]
-    tender_date = tender['Tender Start Date']
+    tender_date = tender['Tender Start Date ']
     if (tender_date - datetime.now() <= timedelta(days=7)) and (tender_date > datetime.now()):
       gen_report.append(i)
 
