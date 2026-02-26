@@ -18,6 +18,7 @@ import os.path
 import markdown
 import json
 import requests
+import re
 
 import google.auth
 from googleapiclient.http import MediaInMemoryUpload
