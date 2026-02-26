@@ -7,9 +7,10 @@ FIXED_HEIGHT = 500
 logo_url = 'app/static/pluang.png'
 
 # test case
-report_id = 'A-1'
+report_id = st.query_params.get("report_id")
+# report_id = 'A-1' ?report_id=CDN%20%26%20App%20Security-Akamai
 filename = 'CDN & App Security-Akamai'
-title = "Akamai - CDN"
+
 # Reduce top padding
 st.markdown(
     """
@@ -26,6 +27,7 @@ st.markdown(
     unsafe_allow_html=True
 )
 
+# add header
 st.markdown(
     f"""
     <style>
@@ -40,7 +42,7 @@ st.markdown(
     </style>
 
     <div class="header-container">
-        <h1 style='margin:0; padding:0; font-size: 1.8rem;'>{title}</h1>
+        <h1 style='margin:0; padding:0; font-size: 1.8rem;'>{report_id}</h1>
         <p style='margin:0; opacity: 0.8;'>Procurement Intelligence Report Chat Bot</p>
     </div>
     """,
@@ -52,7 +54,7 @@ col1, col2 = st.columns([3, 2])
 
 with col1:
     with st.container(height = FIXED_HEIGHT):
-        with open(f'{filename}.md', "r") as f:
+        with open(f'{report_id}.md', "r") as f:
             markdown_content = f.read()
         st.markdown(markdown_content, unsafe_allow_html=True)
 
@@ -65,7 +67,7 @@ with col2:
     if "messages" not in st.session_state:
         try:
             chat_history = pd.read_csv("chat history example.csv")
-            chat_history = chat_history[chat_history["report_id"] == report_id]
+            chat_history = chat_history[chat_history["report_id"] == 'A-1']
             st.session_state.messages = []
             for _, row in chat_history.iterrows():
                 st.session_state.messages.append({"role": row["role"], "content": row["message"]})
